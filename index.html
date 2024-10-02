@@ -15,53 +15,80 @@
       line-height: 1.6;
       background-color: #FEF3E2;
     }
+   
     header {
-      background-color: #22562d;
-      color: #fff;
-      padding: 10px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding: 0 20px;
-    }
-    .logo {
-      font-size: 1.5em;
-      font-weight: bold;
-    }
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-    .nav-links li a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 1em;
-    }
-    .nav-links li a:hover {
-      color: #f1f1f1;
-    }
-    .search-bar input {
-      padding: 8px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-    .cart-icon img {
-      width: 30px; 
-      height: auto;
-      cursor: pointer;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    .cart-icon img:hover {
-      transform: scale(1.1);
-      opacity: 0.8;
-    }
+  background-color: #22562d;
+  color: #fff;
+  padding: 10px 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+}
+
+/* Logo styling */
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Navigation links styling */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1em;
+}
+
+.nav-links li a:hover {
+  color: #f1f1f1;
+}
+
+/* Search bar and icons container */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Reduced gap to make icons closer */
+}
+
+/* Search bar styling */
+.search-bar input {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Cart and notification icons */
+.cart-icon img,
+.notification-icon {
+  width: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Reduce space between cart and notification icons */
+.cart-icon,
+.notification-icon {
+  margin-right: 10px; /* Control space between the two icons */
+}
+
+.cart-icon img:hover,
+.notification-icon img:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+
     .hero {
       background-image: url('hero img 2.png'); 
       background-size: contain;
@@ -159,6 +186,29 @@
     footer a:hover {
       color: #ddd;
     }
+    /* Responsive adjustments */
+    @media screen and (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .nav-actions {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+}
   </style>
 </head>
 <body>
@@ -176,6 +226,9 @@
       </div>
       <div class="cart-icon">
         <img src="./shopping-cart (4).png" alt="Cart Icon">
+      </div>
+      <div class="notification-icon" id="reminder-button">
+        <img src="./bell.png" alt="bell icon" height="25px" style="cursor:pointer">
       </div>
     </nav>
   </header>
@@ -244,6 +297,79 @@
   </footer>
 
   <script>
+
+    // Function to ask for medication reminder times
+    function askForMedicationReminders() {
+      const timesPerDay = prompt("How many times a day do you want to take your medicine? (1-3)");
+      let reminders = [];
+
+      // Validate input
+      if (timesPerDay === '1' || timesPerDay === '2' || timesPerDay === '3') {
+        for (let i = 0; i < timesPerDay; i++) {
+          const time = prompt(`Enter reminder time for ${i + 1} (e.g., 8:00 AM, 2:00 PM, 8:00 PM):`);
+          reminders.push(time);
+        }
+
+        // Schedule notifications
+        scheduleNotifications(reminders);
+      } else {
+        alert("Please enter a valid number of times (1-3).");
+      }
+    }
+
+    // Function to schedule notifications
+    function scheduleNotifications(reminders) {
+      const now = new Date();
+      
+      reminders.forEach(reminder => {
+        const [time, period] = reminder.split(' '); // Split time and period (AM/PM)
+        const [hours, minutes] = time.split(':').map(Number); // Get hours and minutes
+
+        
+        let reminderTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours + (period.toLowerCase() === 'pm' && hours !== 12 ? 12 : 0), minutes);
+        
+       
+        if (reminderTime < now) {
+          reminderTime.setDate(reminderTime.getDate() + 1);
+        }
+
+        const timeUntilReminder = reminderTime - now;
+
+       
+        setTimeout(() => {
+          new Notification(`Time to take your medicine!`, {
+            body: `Remember to take your medicine before/after meal.`
+          });
+        }, timeUntilReminder);
+      });
+    }
+
+    
+    document.getElementById("reminder-button").addEventListener("click", () => {
+      
+      if (!("Notification" in window)) {
+        alert("This browser does not support desktop notifications.");
+        return;
+      }
+
+     
+      if (Notification.permission === "default") {
+       
+        Notification.requestPermission().then(permission => {
+          if (permission === "granted") {
+            askForMedicationReminders();
+          } else {
+            alert("Notifications are not allowed. Please enable them in your browser settings.");
+          }
+        });
+      } else if (Notification.permission === "granted") {
+       
+        askForMedicationReminders();
+      } else {
+        alert("Notifications are not allowed. Please enable them in your browser settings.");
+      }
+    });
+
     const fileInput = document.getElementById('upload-prescription');
     const uploadStatus = document.getElementById('upload-status');
 
