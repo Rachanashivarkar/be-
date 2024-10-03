@@ -1,99 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MediDelivery</title>
-  <link rel="stylesheet" href="./css/style.css">
-  
-</head>
-<body>
-  <header>
-    <nav>
-      <div class="logo">MediFind</div>
-      <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">Track Order</a></li>
-        <li><a href="#">Login / Sign Up</a></li>
-      </ul>
-      <div class="search-bar">
-        <input type="text" placeholder="Search medicines...">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediDelivery</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">MediFind</div>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Login / Sign Up</a></li>
+        </ul>
+        <div class="search-bar">
+          <input type="text" placeholder="Search medicines..." />
+        </div>
+        <div class="cart-icon">
+          <img src="./images/home/shopping-cart (4).png" alt="Cart Icon" />
+        </div>
+        <div class="notification-icon" id="reminder-button">
+          <img
+            src="./images/home/bell.png"
+            alt="bell icon"
+            height="25px"
+            style="cursor: pointer"
+          />
+        </div>
+      </nav>
+    </header>
+
+    <div class="tagline">
+      <h1>Get Medicines Delivered to Your Doorstep, Fast and Convenient!</h1>
+    </div>
+
+    <section class="hero"></section>
+
+    <div class="buttons-container">
+      <div class="upload-section">
+        <label for="upload-prescription" class="cta-button"
+          >Upload Prescription</label
+        >
+        <input
+          type="file"
+          id="upload-prescription"
+          accept="image/*"
+          capture="environment"
+          style="display: none"
+        />
+        <p id="upload-status" style="margin-top: 10px; color: green"></p>
+        <button class="cta-secondary">Shop Now</button>
       </div>
-      <div class="cart-icon">
-        <img src="./images/home/shopping-cart (4).png" alt="Cart Icon">
+    </div>
+
+    <section class="services">
+      <div class="service-card">
+        <i class="fas fa-truck"></i>
+        <h3>Fast Delivery</h3>
+        <p>Get your medicines in less than 30 minutes.</p>
       </div>
-      <div class="notification-icon" id="reminder-button">
-        <img src="./images/home/bell.png" alt="bell icon" height="25px" style="cursor:pointer">
+      <div class="service-card">
+        <i class="fas fa-store"></i>
+        <h3>Wide Availability</h3>
+        <p>Find the nearest stores with stock availability.</p>
       </div>
-    </nav>
-  </header>
+      <div class="service-card">
+        <i class="fas fa-file-medical"></i>
+        <h3>Prescription Upload</h3>
+        <p>Upload your prescription securely and easily.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-pills"></i>
+        <h3>Non-Prescription Products</h3>
+        <p>Buy health products without a prescription.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-calendar-alt"></i>
+        <h3>Subscription Services</h3>
+        <p>Subscribe to your medicines and never run out.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-bell"></i>
+        <h3>Health Reminders and Alerts</h3>
+        <p>Get reminders for your medications.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-shipping-fast"></i>
+        <h3>Emergency Delivery</h3>
+        <p>Get emergency delivery services.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-user-md"></i>
+        <h3>Real Time Order Tracking</h3>
+        <p>Track your order in real-time.</p>
+      </div>
+    </section>
 
-  <div class="tagline">
-    <h1>Get Medicines Delivered to Your Doorstep, Fast and Convenient!</h1>
-  </div>
+    <footer>
+      <p>
+        © 2024 MediFind | <a href="#">Privacy Policy</a> |
+        <a href="#">Terms of Service</a>
+      </p>
+      <p>Contact us at: support@medifind.com</p>
+    </footer>
 
-  <section class="hero"></section>
-
-  <div class="buttons-container">
-    <div class="upload-section">
-      <label for="upload-prescription" class="cta-button">Upload Prescription</label>
-      <input type="file" id="upload-prescription" accept="image/*" capture="environment" style="display: none;">
-      <p id="upload-status" style="margin-top: 10px; color: green;"></p>
-      <button class="cta-secondary">Shop Now</button>
-    </div>
-  </div>
-
-  <section class="services">
-    <div class="service-card">
-      <i class="fas fa-truck"></i>
-      <h3>Fast Delivery</h3>
-      <p>Get your medicines in less than 30 minutes.</p>
-    </div>
-    <div class="service-card">
-      <i class="fas fa-store"></i>
-      <h3>Wide Availability</h3>
-      <p>Find the nearest stores with stock availability.</p>
-    </div>
-    <div class="service-card">
-      <i class="fas fa-file-medical"></i>
-      <h3>Prescription Upload</h3>
-      <p>Upload your prescription securely and easily.</p>
-    </div>
-    <div class="service-card">
-      <i class="fas fa-pills"></i>
-      <h3>Non-Prescription Products</h3>
-      <p>Buy health products without a prescription.</p>
-    </div>
-    <div class="service-card">
-      <i class="fas fa-calendar-alt"></i>
-      <h3>Subscription Services</h3>
-      <p>Subscribe to your medicines and never run out.</p>
-    </div>
-    <div class="service-card">
-      <i class="fas fa-bell"></i>
-      <h3>Health Reminders and Alerts</h3>
-      <p>Get reminders for your medications.</p>
-    </div>
-    <div class="service-card">
-      <i class="fas fa-shipping-fast"></i>
-      <h3>Emergency Delivery</h3>
-      <p>Get emergency delivery services.</p>
-    </div>
-    <div class="service-card">
-      <i class="fas fa-user-md"></i>
-      <h3>Real Time Order Tracking</h3>
-      <p>Track your order in real-time.</p>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2024 MediFind | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-    <p>Contact us at: support@medifind.com</p>
-  </footer>
-
-  <script src="./js/script.js"></script>
-
-  
-</body>
+    <script src="./js/script.js"></script>
+  </body>
 </html>
