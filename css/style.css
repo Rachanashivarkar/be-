@@ -93,6 +93,11 @@ nav {
       justify-content: center;
       align-items: center;
     }
+    .hero video {
+      width: 60%;  /* or specific width like 800px */
+      height: 100px; /* set to the same height as the hero image */
+      object-fit: cover; /* ensures the video covers the entire area without distortion */
+    }
     .tagline {
       text-align: center;
       margin-top: 20px;
