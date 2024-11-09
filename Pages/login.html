@@ -17,8 +17,16 @@
         <li><a href="./../index.html">Home</a></li>
         <li><a href="#">Products</a></li>
         <li><a href="#">Track Order</a></li>
-        <li><a href="./Pages/login.html">Login / Register</a></li>
-        <li><a href="./Pages/contact.html">Contact Us</a></li>
+        <li><a href="../Pages/login.html">Login</a></li>
+        <li>
+          <a href="#" onclick="toggleRegisterDropdown(event)">Register</a>
+          <div id="register-dropdown" class="dropdown-menu" style="display: none;">
+            <a href="./Pages/customer.html" onclick="registerAs('user')">Register as Customer</a>
+            <a href="./Pages/medical.html" onclick="registerAs('medical-store')">Register as Medical Store</a>
+            <a href="#" onclick="registerAs('doctor')">Register as Doctor</a>
+          </div>
+        </li>
+        <li><a href="../Pages/contact.html">Contact Us</a></li>
       </ul>
       <div class="search-bar">
         <input type="text" placeholder="Search medicines...">
@@ -76,13 +84,13 @@
       if (selectedRole) {
         switch(selectedRole) {
           case "customer":
-            window.location.href = "../register-customer.html";
+            window.location.href = "../Pages/customer.html";
             break;
           case "doctor":
-            window.location.href = "../register-doctor.html";
+            window.location.href = "../Pages/docter.html";
             break;
           case "medical-store":
-            window.location.href = "../register-medical-store.html";
+            window.location.href = "../Pages/medical.html";
             break;
         }
       }
