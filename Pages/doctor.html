@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Registration</title>
+    <style>
+        /* CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FEF3E2;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .registration-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        h2 {
+            text-align: center;
+            color: #22562d;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        fieldset {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        legend {
+            color: #22562d;
+            padding: 0 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="file"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .terms {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .terms a {
+            color: #22562d;
+            text-decoration: none;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+
+        .submit-btn {
+            background-color: #6bb77b;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #4b8b59;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <h2>Doctor Registration</h2>
+        <form id="doctorRegistrationForm" enctype="multipart/form-data">
+            <!-- Personal Information -->
+            <fieldset>
+                <legend>Personal Information</legend>
+                <label for="doctorName">Doctor's Name:</label>
+                <input type="text" id="doctorName" name="doctorName" required>
+
+                <label for="specialization">Specialization:</label>
+                <select id="specialization" name="specialization" required>
+                    <option value="">Select Specialization</option>
+                    <option value="general">General Practitioner</option>
+                    <option value="pediatrician">Pediatrician</option>
+                    <option value="cardiologist">Cardiologist</option>
+                    <option value="dermatologist">Dermatologist</option>
+                    <option value="other">Other</option>
+                </select>
+            </fieldset>
+
+            <!-- Contact Information -->
+            <fieldset>
+                <legend>Contact Information</legend>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+            </fieldset>
+
+            <!-- Clinic Details -->
+            <fieldset>
+                <legend>Clinic Details</legend>
+                <label for="clinicName">Clinic Name:</label>
+                <input type="text" id="clinicName" name="clinicName" required>
+
+                <label for="clinicAddress">Clinic Address:</label>
+                <textarea id="clinicAddress" name="clinicAddress" rows="3" required></textarea>
+            </fieldset>
+
+            <!-- Qualifications and Documents -->
+            <fieldset>
+                <legend>Qualifications and Documents</legend>
+                <label for="qualification">Highest Qualification:</label>
+                <input type="text" id="qualification" name="qualification" required>
+
+                <label for="licenseNumber">Medical License Number:</label>
+                <input type="text" id="licenseNumber" name="licenseNumber" required>
+
+                <label for="licenseUpload">Upload License Document:</label>
+                <input type="file" id="licenseUpload" name="licenseUpload" accept=".pdf, .jpg, .png" required>
+            </fieldset>
+
+            <!-- Terms and Conditions -->
+            <label class="terms">
+                <input type="checkbox" name="terms" id="terms" required> I agree to the <a href="#">Terms and Conditions</a>
+            </label>
+            <span class="error" id="error-message"></span>
+
+            <button type="submit" class="submit-btn">Register Doctor</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript for form validation
+        document.getElementById("doctorRegistrationForm").addEventListener("submit", function(event) {
+            const errorMessage = document.getElementById("error-message");
+            const terms = document.getElementById("terms");
+
+            if (!terms.checked) {
+                event.preventDefault();
+                errorMessage.textContent = "You must agree to the terms and conditions.";
+            } else {
+                errorMessage.textContent = "";
+                alert("Form submitted successfully!");
+            }
+        });
+    </script>
+</body>
+</html>
