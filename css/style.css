@@ -93,11 +93,7 @@ nav {
       justify-content: center;
       align-items: center;
     }
-    .hero video {
-      width: 60%;  /* or specific width like 800px */
-      height: 100px; /* set to the same height as the hero image */
-      object-fit: cover; /* ensures the video covers the entire area without distortion */
-    }
+    
     .tagline {
       text-align: center;
       margin-top: 20px;
@@ -207,4 +203,25 @@ nav {
   .search-bar input {
     width: 100%;
   }
+}
+
+/* Dropdown styling */
+.dropdown-menu {
+  position: absolute;
+  background-color: #a8d5a2; /* Light green background */
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px; /* Optional: rounded corners */
+}
+
+.dropdown-menu a {
+  color: #ffffff; /* White text */
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu a:hover {
+  background-color: #7bb173; /* Darker green for hover effect */
 }

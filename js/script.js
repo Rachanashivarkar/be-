@@ -84,3 +84,28 @@
       }
     });
   
+    // Toggle the dropdown menu
+function toggleRegisterDropdown(event) {
+  event.preventDefault();
+  const dropdown = document.getElementById("register-dropdown");
+  dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+}
+
+// Redirect to the appropriate registration page based on the selection
+function registerAs(role) {
+  let url;
+  switch (role) {
+    case 'user':
+      url = './Pages/register-user.html';
+      break;
+    case 'medical-store':
+      url = './Pages/register-medical-store.html';
+      break;
+    case 'doctor':
+      url = './Pages/register-doctor.html';
+      break;
+    default:
+      return;
+  }
+  window.location.href = url;
+}
