@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Store Registration</title>
-    <style>
-        /* CSS */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <link rel="stylesheet" href="./../css/style.css">
 
+    <style>
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #FEF3E2;
-            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Add padding to the main content to avoid overlapping with fixed navbar */
+        main {
+            padding-top: 80px; /* Adjust based on the navbar height */
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            padding: 20px;
+            min-height: 100vh;
         }
 
         .registration-container {
@@ -119,75 +119,108 @@
     </style>
 </head>
 <body>
-    <div class="registration-container">
-        <h2>Medical Store Registration</h2>
-        <form id="registrationForm" enctype="multipart/form-data">
-            <!-- Store Details -->
-            <fieldset>
-                <legend>Store Details</legend>
-                <label for="storeName">Store Name:</label>
-                <input type="text" id="storeName" name="storeName" required>
+    <header>
+        <nav>
+            <div class="logo">MediFind</div>
+            <ul class="nav-links">
+                <li><a href="./../index.html">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Track Order</a></li>
+                <li>
+                    <a href="#" onclick="toggleRegisterDropdown(event)">Register</a>
+                    <div id="register-dropdown" class="dropdown-menu" style="display: none;">
+                        <a href="./Pages/customer.html" onclick="registerAs('user')">Register as Customer</a>
+                        <a href="./Pages/medical.html" onclick="registerAs('medical-store')">Register as Medical Store</a>
+                        <a href="./Pages/doctor.html" onclick="registerAs('doctor')">Register as Doctor</a>
+                    </div>
+                </li>
+                <li><a href="./login.html">Login</a></li>
+                <li><a href="./contact.html">Contact Us</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" placeholder="Search medicines...">
+            </div>
+            <div class="cart-icon">
+                <img src="./../images/home/shopping-cart (4).png" alt="Cart Icon">
+            </div>
+            <div class="notification-icon" id="reminder-button">
+                <img src="./../images/home/bell.png" alt="bell icon" height="25px" style="cursor:pointer">
+            </div>
+        </nav>
+    </header>
 
-                <label for="storeAddress">Store Address:</label>
-                <textarea id="storeAddress" name="storeAddress" rows="3" required></textarea>
+    <!-- Main content wrapper -->
+    <main>
+        <div class="registration-container">
+            <h2>Medical Store Registration</h2>
+            <form id="registrationForm" enctype="multipart/form-data">
+                <!-- Store Details -->
+                <fieldset>
+                    <legend>Store Details</legend>
+                    <label for="storeName">Store Name:</label>
+                    <input type="text" id="storeName" name="storeName" required>
+                    
+                    <label for="storeAddress">Store Address:</label>
+                    <textarea id="storeAddress" name="storeAddress" rows="3" required></textarea>
 
-                <label for="storeType">Store Type:</label>
-                <select id="storeType" name="storeType" required>
-                    <option value="">Select Type</option>
-                    <option value="pharmacy">Pharmacy</option>
-                    <option value="clinic">Clinic</option>
-                    <option value="hospital">Hospital</option>
-                </select>
-            </fieldset>
+                    <label for="storeType">Store Type:</label>
+                    <select id="storeType" name="storeType" required>
+                        <option value="">Select Type</option>
+                        <option value="pharmacy">Pharmacy</option>
+                        <option value="clinic">Clinic</option>
+                        <option value="hospital">Hospital</option>
+                    </select>
+                </fieldset>
 
-            <!-- Owner Details -->
-            <fieldset>
-                <legend>Owner Details</legend>
-                <label for="ownerName">Owner Name:</label>
-                <input type="text" id="ownerName" name="ownerName" required>
+                <!-- Owner Details -->
+                <fieldset>
+                    <legend>Owner Details</legend>
+                    <label for="ownerName">Owner Name:</label>
+                    <input type="text" id="ownerName" name="ownerName" required>
 
-                <label for="ownerEmail">Owner Email:</label>
-                <input type="email" id="ownerEmail" name="ownerEmail" required>
+                    <label for="ownerEmail">Owner Email:</label>
+                    <input type="email" id="ownerEmail" name="ownerEmail" required>
 
-                <label for="ownerPhone">Owner Phone:</label>
-                <input type="tel" id="ownerPhone" name="ownerPhone" pattern="[0-9]{10}" required>
-            </fieldset>
+                    <label for="ownerPhone">Owner Phone:</label>
+                    <input type="tel" id="ownerPhone" name="ownerPhone" pattern="[0-9]{10}" required>
+                </fieldset>
 
-            <!-- Contact Information -->
-            <fieldset>
-                <legend>Contact Information</legend>
-                <label for="contactPerson">Contact Person:</label>
-                <input type="text" id="contactPerson" name="contactPerson" required>
+                <!-- Contact Information -->
+                <fieldset>
+                    <legend>Contact Information</legend>
+                    <label for="contactPerson">Contact Person:</label>
+                    <input type="text" id="contactPerson" name="contactPerson" required>
 
-                <label for="contactPhone">Contact Phone:</label>
-                <input type="tel" id="contactPhone" name="contactPhone" pattern="[0-9]{10}" required>
+                    <label for="contactPhone">Contact Phone:</label>
+                    <input type="tel" id="contactPhone" name="contactPhone" pattern="[0-9]{10}" required>
 
-                <label for="contactEmail">Contact Email:</label>
-                <input type="email" id="contactEmail" name="contactEmail" required>
-            </fieldset>
+                    <label for="contactEmail">Contact Email:</label>
+                    <input type="email" id="contactEmail" name="contactEmail" required>
+                </fieldset>
 
-            <!-- Legal Documents -->
-            <fieldset>
-                <legend>Legal Documents</legend>
-                <label for="licenseNumber">License Number:</label>
-                <input type="text" id="licenseNumber" name="licenseNumber" required>
+                <!-- Legal Documents -->
+                <fieldset>
+                    <legend>Legal Documents</legend>
+                    <label for="licenseNumber">License Number:</label>
+                    <input type="text" id="licenseNumber" name="licenseNumber" required>
 
-                <label for="licenseUpload">Upload License Document:</label>
-                <input type="file" id="licenseUpload" name="licenseUpload" accept=".pdf, .jpg, .png" required>
+                    <label for="licenseUpload">Upload License Document:</label>
+                    <input type="file" id="licenseUpload" name="licenseUpload" accept=".pdf, .jpg, .png" required>
 
-                <label for="gstNumber">GST Number:</label>
-                <input type="text" id="gstNumber" name="gstNumber" required>
-            </fieldset>
+                    <label for="gstNumber">GST Number:</label>
+                    <input type="text" id="gstNumber" name="gstNumber" required>
+                </fieldset>
 
-            <!-- Terms and Conditions -->
-            <label class="terms">
-                <input type="checkbox" name="terms" id="terms" required> I agree to the <a href="#">Terms and Conditions</a>
-            </label>
-            <span class="error" id="error-message"></span>
+                <!-- Terms and Conditions -->
+                <label class="terms">
+                    <input type="checkbox" name="terms" id="terms" required> I agree to the <a href="#">Terms and Conditions</a>
+                </label>
+                <span class="error" id="error-message"></span>
 
-            <button type="submit" class="submit-btn">Register Store</button>
-        </form>
-    </div>
+                <button type="submit" class="submit-btn">Register Store</button>
+            </form>
+        </div>
+    </main>
 
     <script>
         // JavaScript for form validation
