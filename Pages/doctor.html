@@ -1,201 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Registration</title>
-    <style>
-        /* CSS */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register as Doctor - MediFind</title>
+  <link rel="stylesheet" href="./../css/style.css">
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #FEF3E2;
-            line-height: 1.6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            padding: 20px;
-        }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #FEF3E2;
+      margin: 0;
+      padding: 0;
+    }
 
-        .registration-container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-            overflow-y: auto;
-            max-height: 90vh;
-        }
+    main {
+      padding-top: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        h2 {
-            text-align: center;
-            color: #22562d;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-        }
+    .register-container {
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        fieldset {
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-        }
+    .register-container h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
 
-        legend {
-            color: #22562d;
-            padding: 0 10px;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
 
-        label {
-            display: block;
-            color: #333;
-            margin-bottom: 5px;
-            font-size: 0.9em;
-        }
+    form label {
+      margin-bottom: 5px;
+      color: #666;
+      font-weight: bold;
+    }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="file"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 0.95em;
-        }
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"] {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
 
-        textarea {
-            resize: vertical;
-        }
+    .register-button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
 
-        .terms {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 0.9em;
-        }
+    .register-button:hover {
+      background-color: #45a049;
+    }
 
-        .terms a {
-            color: #22562d;
-            text-decoration: none;
-            margin-left: 5px;
-            font-weight: bold;
-        }
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.9em;
+    }
 
-        .submit-btn {
-            background-color: #6bb77b;
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
+    .login-link a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
 
-        .submit-btn:hover {
-            background-color: #4b8b59;
-        }
+    .login-link a:hover {
+      text-decoration: underline;
+    }
 
-        .error {
-            color: red;
-            font-size: 0.9em;
-            margin-top: -10px;
-            margin-bottom: 10px;
-        }
-    </style>
+    .error-message {
+      color: red;
+      font-size: 0.9em;
+      text-align: center;
+      display: none;
+    }
+
+    .success-message {
+      color: green;
+      font-size: 0.9em;
+      text-align: center;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <div class="registration-container">
-        <h2>Doctor Registration</h2>
-        <form id="doctorRegistrationForm" enctype="multipart/form-data">
-            <!-- Personal Information -->
-            <fieldset>
-                <legend>Personal Information</legend>
-                <label for="doctorName">Doctor's Name:</label>
-                <input type="text" id="doctorName" name="doctorName" required>
+  <header>
+    <nav>
+      <div class="logo">MediFind</div>
+      <ul class="nav-links">
+        <li><a href="./../index.html">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Track Order</a></li>
+        <li>
+          <a href="#" onclick="toggleRegisterDropdown(event)">Register</a>
+          <div id="register-dropdown" class="dropdown-menu" style="display: none;">
+            <a href="./customer.html">Register as Customer</a>
+            <a href="./medical.html">Register as Medical Store</a>
+            <a href="./doctor.html">Register as Doctor</a>
+          </div>
+        </li>
+        <li><a href="./login.html">Login</a></li>
+        <li><a href="./contact.html">Contact Us</a></li>
+      </ul>
+      <div class="search-bar">
+        <input type="text" placeholder="Search medicines...">
+      </div>
+      <div class="cart-icon">
+        <img src="./../images/home/shopping-cart (4).png" alt="Cart Icon">
+      </div>
+      <div class="notification-icon" id="reminder-button">
+        <img src="./../images/home/bell.png" alt="bell icon" height="25px" style="cursor:pointer">
+      </div>
+    </nav>
+  </header>
 
-                <label for="specialization">Specialization:</label>
-                <select id="specialization" name="specialization" required>
-                    <option value="">Select Specialization</option>
-                    <option value="general">General Practitioner</option>
-                    <option value="pediatrician">Pediatrician</option>
-                    <option value="cardiologist">Cardiologist</option>
-                    <option value="dermatologist">Dermatologist</option>
-                    <option value="other">Other</option>
-                </select>
-            </fieldset>
+  <main>
+    <div class="register-container">
+      <h2>Register as Doctor</h2>
+      <div class="error-message" id="error-message">Please fill in all fields correctly.</div>
+      <div class="success-message" id="success-message">Registration successful!</div>
+      <form id="doctorRegistrationForm" onsubmit="return validateForm()">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
 
-            <!-- Contact Information -->
-            <fieldset>
-                <legend>Contact Information</legend>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
-            </fieldset>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
 
-            <!-- Clinic Details -->
-            <fieldset>
-                <legend>Clinic Details</legend>
-                <label for="clinicName">Clinic Name:</label>
-                <input type="text" id="clinicName" name="clinicName" required>
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
 
-                <label for="clinicAddress">Clinic Address:</label>
-                <textarea id="clinicAddress" name="clinicAddress" rows="3" required></textarea>
-            </fieldset>
+        <label for="license-number">Medical License Number:</label>
+        <input type="text" id="license-number" name="license-number" required>
 
-            <!-- Qualifications and Documents -->
-            <fieldset>
-                <legend>Qualifications and Documents</legend>
-                <label for="qualification">Highest Qualification:</label>
-                <input type="text" id="qualification" name="qualification" required>
+        <label for="specialization">Specialization:</label>
+        <input type="text" id="specialization" name="specialization" required>
 
-                <label for="licenseNumber">Medical License Number:</label>
-                <input type="text" id="licenseNumber" name="licenseNumber" required>
-
-                <label for="licenseUpload">Upload License Document:</label>
-                <input type="file" id="licenseUpload" name="licenseUpload" accept=".pdf, .jpg, .png" required>
-            </fieldset>
-
-            <!-- Terms and Conditions -->
-            <label class="terms">
-                <input type="checkbox" name="terms" id="terms" required> I agree to the <a href="#">Terms and Conditions</a>
-            </label>
-            <span class="error" id="error-message"></span>
-
-            <button type="submit" class="submit-btn">Register Doctor</button>
-        </form>
+        <button type="submit" class="register-button">Register</button>
+      </form>
+      <p class="login-link">Already have an account? <a href="./login.html">Login here</a></p>
     </div>
+  </main>
 
-    <script>
-        // JavaScript for form validation
-        document.getElementById("doctorRegistrationForm").addEventListener("submit", function(event) {
-            const errorMessage = document.getElementById("error-message");
-            const terms = document.getElementById("terms");
+  <script>
+    function validateForm() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const confirmPassword = document.getElementById("confirm-password").value.trim();
+      const licenseNumber = document.getElementById("license-number").value.trim();
+      const specialization = document.getElementById("specialization").value.trim();
+      const errorMessage = document.getElementById("error-message");
+      const successMessage = document.getElementById("success-message");
 
-            if (!terms.checked) {
-                event.preventDefault();
-                errorMessage.textContent = "You must agree to the terms and conditions.";
-            } else {
-                errorMessage.textContent = "";
-                alert("Form submitted successfully!");
-            }
-        });
-    </script>
+      errorMessage.style.display = "none";
+      successMessage.style.display = "none";
+
+      if (!name || !email || !password || !confirmPassword || !licenseNumber || !specialization) {
+        errorMessage.textContent = "Please fill in all fields.";
+        errorMessage.style.display = "block";
+        return false;
+      }
+
+      if (password !== confirmPassword) {
+        errorMessage.textContent = "Passwords do not match.";
+        errorMessage.style.display = "block";
+        return false;
+      }
+
+      successMessage.textContent = "Registration successful!";
+      successMessage.style.display = "block";
+      errorMessage.style.display = "none";
+      return false;
+    }
+  </script>
 </body>
 </html>
